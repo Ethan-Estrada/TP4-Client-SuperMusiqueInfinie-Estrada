@@ -1,0 +1,90 @@
+<div class="galleryPage">
+
+  <div class="row galleries">
+    <!-- Titres des la page -->
+    <div class="col-1">
+      <h1>&nbsp;Mes galeries <mat-icon>photo_library</mat-icon></h1>
+    </div>
+  </div>
+
+  <div class="row galleries">
+
+    <div class="col-1 galleryList">
+      <!-- Photos de couverture de galeries -->
+     <div class="galleryThumbnail" *ngFor="let g of gallerys" (click)="selectGallery(g)">
+      <div>{{g.name}}</div>
+      <img [src]="'https://localhost:7217/api/Galleries/GetFile/sm/' + g.id" alt="{{g.name}}" onerror="this.onerror=null; this.src='/assets/images/galleryThumbnail.png'"
+      [ngClass]="{'active' : (selectedItem.id === g.id)}">
+     </div>
+
+    </div>
+
+    <div class="col-4 pictureList">
+
+      <div class="options newGallery">
+        <h3>Nouvelle galerie : </h3>
+        <input type="text" name="newGalleryName" placeholder="Nom de la galerie" [(ngModel)]="name">
+
+        <!-- Input pour l'image de couverture -->
+        <form>
+          <input #fileUploadGallery type="file" name="image" accept="images/*">
+          <button class="send" type="submit" mat-raised-button (click)="newGallery()">Créer la galerie	<mat-icon>add_to_queue</mat-icon></button>
+        </form>
+      </div>
+      <div *ngIf="selectedGallery != null">
+      <hr>
+        <div class="options newGallery">
+        <!-- Options de la galerie sélectionnée -->
+        <h3>Modifier la galerie sélectionnée : </h3>
+        <div class="options newGallery">
+
+          <!-- Changer la couverture -->
+           <form>
+            <input #fileUploadNewGallery type="file" name="image" accept="images/*">
+            <button mat-raised-button (click)="putGallery()">Changer la couverture <mat-icon>photo_library</mat-icon></button>
+           </form>
+            <!-- Supprimer la galerie -->
+            <button mat-raised-button color="warn" (click)="gallery.deleteGallery(selectedGallery.id)">Supprimer la galerie <mat-icon>delete</mat-icon></button>
+        </div>
+        </div>
+        <hr>
+        <div>
+          <form (submit)="uploadPhoto()" class="options newGallery">
+            <h3>Ajouter des photos dans la galerie : </h3>
+            <input #fileUploadViewChild type="file" name="image" accept="images/*">
+            <button class="send" type="submit">Envoyer</button>
+          </form>
+          <hr>
+          <h2>Photos de la galerie sélectionnée <mat-icon>photo_camera</mat-icon></h2>
+          <div style="width: 100%;" *ngIf="photos.length > 0">
+                <div class="glide" >
+                    <div class="glide__track" data-glide-el="track">
+                        <ul class="glide__slides">
+                            <li class="glide__slide" style="height: 400px;" *ngFor="let b of photos" #glideitems>
+                                <button class="delete" (click)="deletePhoto(b)">Effacer</button>
+                                <img [routerLink]="['/singlePhoto', galleryId, b.id]" [src]="'https://localhost:7217/api/Photos/GetFile/sm/' + galleryId +'/'+ b.id" alt="???" style="object-fit: cover;width: 100%; height: 100%;">
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Les flèches pour le déplacement -->
+                    <div class="glide__arrows" data-glide-el="controls">
+                        <div class="arrow glide__arrow glide__arrow--left" data-glide-dir="<">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="align-self: center;">
+                                <path d="M0 12l10.975 11 2.848-2.828-6.176-6.176H24v-3.992H7.646l6.176-6.176L10.975 1 0 12z"></path>
+                            </svg>
+                        </div>
+                        <div class="arrow glide__arrow glide__arrow--right" data-glide-dir=">">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="align-self: center;">
+                                <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

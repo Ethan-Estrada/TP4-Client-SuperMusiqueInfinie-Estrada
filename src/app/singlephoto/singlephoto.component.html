@@ -1,0 +1,6 @@
+<div class="center">
+  <h3>Photos sélectionnée en grand format <mat-icon>photo_camera</mat-icon></h3>
+  <button [routerLink]="['/myGalleries']">Retour</button>
+</div>
+<!-- TO DO: [Étape 4] Ajouter un <img> quit contient une référence vers la grande image stockée sur le serveur -->
+<img  class="img" [routerLink]="['/singlePhoto', galId, photoId]" [src]="'https://localhost:7217/api/Photos/GetFile/lg/' + galId +'/'+ photoId" alt="???">

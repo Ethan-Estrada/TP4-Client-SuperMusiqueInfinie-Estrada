@@ -1,0 +1,48 @@
+.options h3 mat-icon{
+    vertical-align: middle;
+}
+
+.options h3{
+    margin:5px 0px;
+    margin-right:10px;
+}
+
+.newGallery input{
+    margin-right:10px;
+}
+
+.newGallery button{
+    margin-left:20px;
+}
+
+.pictureList>h3{
+     margin-bottom:0px;
+}
+
+.active{
+  border : 5px solid green;
+  border-radius: 5px;
+}
+
+.image{
+  width: 100px;
+  height: 100px;
+}
+.grid-item{
+  margin-bottom:3px;
+
+}
+.grid-item img{
+  width: 200px;
+
+}
+
+.arrow{
+  background: gray;
+  border-radius: 25px;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  border: none;
+}
+
